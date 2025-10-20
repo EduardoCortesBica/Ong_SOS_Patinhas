@@ -4,24 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projetos - SOS Patinhas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <img src="images/logo.png" alt="Logo da ONG SOS Patinhas" width="100" height="100">
+        <div class="menu-toggle">
+        <span></span><span></span><span></span>
+        </div>
         <nav>
             <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
-                <li><a href="cadastros.html">Cadastro</a></li>
-            </ul>
-        </nav>
-    </header>
+            <li><a href="index.html">Início</a></li>
+            <li>
+                <a href="projetos.html">Projetos ▾</a>
+                <ul>
+                    <li><a href="projetos.html#Resgate">Resgate</a></li>
+                    <li><a href="projetos.html#Saude">Saúde</a></li>
+                    <li><a href="projetos.html#Adocao">Adoção</a></li>
+                </ul>
+            </li>
+            <li><a href="cadastros.html">Cadastro</a></li>
+        </ul>
+    </nav>
+</header>
     
     <main>
+        <section>
         <h1>Conheça Nossas Ações de Impacto</h1>
         <p>Transformamos vidas através de projetos dedicados ao bem-estar e à segurança animal. Veja como nosso trabalho é estruturado em três pilares essenciais.</p>
-
-        <section id="resgate">
+        </section>
+        <section id="Resgate">
             <h2>1. Projeto "Caminho da Esperança" (Resgate)</h2>
             
             <figure>
@@ -42,7 +57,7 @@
             <p><strong>Sua doação ajuda a cobrir custos de combustível para resgate e medicamentos de emergência.</strong></p>
         </section>
 
-        <section id="saude">
+        <section id="Saude">
             <h2>2. Missão Pelo Bem-Estar (Saúde e Prevenção)</h2>
             
             <figure>
@@ -61,7 +76,7 @@
             </ul>
         </section>
 
-        <section id="adocao">
+        <section id="Adocao">
             <h2>3. Projeto "Lar Doce Lar" (Adoção Responsável)</h2>
             
             <figure>
@@ -94,14 +109,31 @@
         </section>
     </main>
 
-    <footer>
-        <p><strong>Entre em Contato:</strong></p>
-    <address>
-        <p>Endereço: Rua das Flores, 123 - Porto Alegre, RS</p>
-        <p>Email: contato@sospatinhas.org | Tel: (51) 99999-0000</p>
-    </address>
-    <p>© 2025 SOS Patinhas</p>
-    </footer>
+<footer>
+    <div class="footer-container">
+        <div class="footer-about">
+            <h3>SOS Patinhas</h3>
+            <p>Transformando vidas através da adoção responsável. Resgate, cuidado e amor em um só lugar.</p>
+        </div>
+        <div class="footer-contact">
+            <h3>Contato</h3>
+            <address>
+                <p>Email: <a href="mailto:contato@sospatinhas.com">contato@sospatinhas.com</a></p>
+                <p>Telefone: (55) 1234-5678</p>
+                <p>Santa Maria, RS - Brasil</p>
+            </address>
+        </div>
+        <div class="footer-social">
+            <h3>Siga-nos</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 SOS Patinhas. Todos os direitos reservados.</p>
+    </div>
+</footer>
 
 </body>
 </html>
