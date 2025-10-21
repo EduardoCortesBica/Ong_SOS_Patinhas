@@ -9,7 +9,7 @@
     --cor-secundaria-escura: #004c99;
 
     --cor-neutra-100: #ffffff;
-    --cor-neutra-200: #f5f5f5;
+    --cor-neutra-200: #ece5db;
     --cor-neutra-300: #e0e0e0;
     --cor-neutra-600: #666666;
     --cor-neutra-900: #333333;
@@ -86,6 +86,7 @@ header {
 header img {
     width: 90px;
     height: auto;
+    border-radius: 50%;
 }
 
 /* ===== MENU PRINCIPAL ===== */
@@ -250,21 +251,32 @@ main section {
 
 /* ===== FORMULÁRIOS ===== */
 form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+    background-color: #fff;
+    padding: var(--space-4);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-input, select, textarea {
-    padding: var(--space-2);
-    border-radius: 6px;
-    border: 1px solid var(--cor-neutra-300);
+/* Campos */
+input:not([type="radio"]), 
+select, 
+textarea {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 8px;
+    border: 1px solid var(--cor-neutra-300, #e0e0e0); /* Adicionei uma cor padrão */
     font-size: var(--fs-md);
-    transition: border-color 0.3s ease;
+    background-color: #fdfdfd;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 input:focus, select:focus, textarea:focus {
     border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(0, 120, 255, 0.1);
     outline: none;
 }
 
@@ -272,10 +284,36 @@ input:invalid {
     border-color: red;
 }
 
+/* Campos de texto mais longos */
+textarea {
+    grid-column: 1 / -1;
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Botão */
+button {
+    grid-column: 1 / -1;
+    padding: var(--space-3);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--cor-primaria);
+    color: #fff;
+    font-size: var(--fs-md);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--cor-primaria-hover, #0056b3);
+}
+
 /* ===== ALERTAS ===== */
 .alert {
+    grid-column: 1 / -1;
     padding: var(--space-2) var(--space-3);
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: bold;
 }
 
@@ -288,6 +326,7 @@ input:invalid {
     background-color: #f8d7da;
     color: #721c24;
 }
+
 
 /* ===== BADGES / TAGS ===== */
 .badge {
@@ -364,12 +403,16 @@ footer a:hover {
     color: var(--cor-neutra-600);
 }
 
-/* ===== CENTRALIZAÇÃO DE IMAGENS ===== */
+/* ===== CENTRALIZAÇÃO DE IMAGENS e TEXTO ===== */
 .center-image {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
+.center-text {
+    text-align: center;
+}
+
 
 /* =====================================================
    RESPONSIVIDADE
