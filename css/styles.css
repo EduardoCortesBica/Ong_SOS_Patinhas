@@ -40,18 +40,36 @@
 }
 
 /* =====================================================
-   BASE E RESET
+                       BASE E RESET
    ===================================================== */
+
 * {
     box-sizing: border-box;
 }
 
-body {
+html, body {
     margin: 0;
-    font-family: var(--fonte-primaria);
+    padding: 0;
+    width: 100%;
+    /* A linha abaixo é um seguro final, mas a causa real será corrigida no form */
+    overflow-x: hidden; 
+}
+
+body {
+    font-family: var(--fonte-primaria); /* Verifique se o nome da variável está correto */
     color: var(--cor-neutra-900);
     background-color: var(--cor-neutra-200);
     line-height: 1.6;
+}
+
+main section {
+    width: 100%; 
+    max-width: var(--container-max-width, 1200px);
+    margin: var(--space-5) auto;
+    padding: var(--space-4);
+    background-color: var(--color-neutral-100);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 h1, h2, h3 {
@@ -69,13 +87,13 @@ a {
 }
 
 /* =====================================================
-   HEADER E NAVEGAÇÃO
+                    HEADER E NAVEGAÇÃO
    ===================================================== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-2) var(--space-4);
+    padding: var(--space-2) var(--space-3);
     background-color: var(--cor-neutra-100);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     position: sticky;
@@ -84,7 +102,7 @@ header {
 }
 
 header img {
-    width: 90px;
+    width: 80px;
     height: auto;
     border-radius: 50%;
 }
@@ -110,77 +128,97 @@ nav a:hover {
 }
 
 /* ===== SUBMENU (Dropdown) ===== */
-nav li {
-    position: relative;
-}
-
-nav li ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
+/* =====================================================
+            HEADER E NAVEGAÇÃO (Mobile First)
+   ===================================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
     background-color: var(--cor-neutra-100);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    list-style: none;
-    padding: var(--space-2);
-    border-radius: 8px;
-    min-width: 150px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-nav li:hover > ul {
-    display: block;
+header img {
+    width: 80px; /* Logo um pouco menor para celular */
+    height: auto;
 }
 
-nav li ul li {
-    padding: var(--space-1) 0;
-}
+/* --- ESTILOS DO MENU PARA CELULAR (PADRÃO) --- */
 
-nav li ul li a {
-    color: var(--cor-neutra-900);
-}
-
-nav li ul li a:hover {
-    color: var(--cor-primaria);
-}
-
-/* ===== MENU HAMBÚRGUER ===== */
+/* Menu Hambúrguer (visível por padrão) */
 .menu-toggle {
-    display: none;
+    display: flex;
     flex-direction: column;
     cursor: pointer;
+    gap: 4px; /* Espaço entre as barrinhas */
 }
 
 .menu-toggle span {
     width: 25px;
     height: 3px;
     background-color: var(--cor-neutra-900);
-    margin: 4px 0;
     border-radius: 2px;
 }
 
+/* Navegação (escondida por padrão) */
+nav {
+    display: none; /* Esconde o menu por padrão */
+    position: absolute;
+    top: 100%; /* Começa logo abaixo do header */
+    right: 0;
+    width: 100%;
+    background-color: var(--cor-neutra-100);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Quando o menu estiver ATIVO, ele aparece */
+nav.active {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+    padding: var(--space-3);
+    margin: 0;
+    flex-direction: column; /* Itens um abaixo do outro */
+}
+
+nav ul li {
+    text-align: center;
+    padding: var(--space-2) 0;
+}
+
+/* Submenu no mobile */
+nav li ul {
+    display: none; /* Escondido por padrão, pode ser ativado com JS se necessário */
+    position: static;
+    box-shadow: none;
+    padding: var(--space-2) 0 0 0;
+}
+
 /* =====================================================
-   LAYOUT PRINCIPAL (GRID)
+                 LAYOUT PRINCIPAL (GRID)
    ===================================================== */
 main {
-    display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 1fr);
-    gap: var(--grid-gap);
-    max-width: var(--container-max-width);
-    margin: var(--space-5) auto;
-    padding: 0 var(--space-3);
+    display: block;
 }
 
 main section {
-    grid-column: span 12;
-    background-color: var(--cor-neutra-100);
+    max-width: var(--container-max-width, 1200px);
+    margin: var(--space-5) auto; /* Topo/Fundo e Centraliza nas laterais */
     padding: var(--space-4);
+    background-color: var(--cor-neutra-100);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    margin-bottom: var(--space-4);
 }
 
 /* =====================================================
-   COMPONENTES DE INTERFACE
+                 COMPONENTES DE INTERFACE
    ===================================================== */
 
 /* ===== BOTÕES ===== */
@@ -250,50 +288,73 @@ main section {
 }
 
 /* ===== FORMULÁRIOS ===== */
+/* Variante fixa: força um campo por linha (cascata) em todas as larguras */
+
 form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    width: 100%;
+    display: block; /* FORÇA bloco único (uma coluna) */
     gap: var(--space-3);
-    background-color: #fff;
-    padding: var(--space-4);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-/* Campos */
-input:not([type="radio"]), 
-select, 
-textarea {
+/* Container interno opcional para alinhamento */
+.form-container, .form-grid {
     width: 100%;
-    padding: var(--space-2) var(--space-3);
-    border-radius: 8px;
-    border: 1px solid var(--cor-neutra-300, #e0e0e0); /* Adicionei uma cor padrão */
-    font-size: var(--fs-md);
-    background-color: #fdfdfd;
-    transition: all 0.3s ease;
+    max-width: var(--container-max-width, 1200px);
+    margin: 0 auto;
+    padding: 0;
     box-sizing: border-box;
 }
 
-input:focus, select:focus, textarea:focus {
-    border-color: var(--cor-primaria);
-    box-shadow: 0 0 0 3px rgba(0, 120, 255, 0.1);
-    outline: none;
-}
-
-input:invalid {
-    border-color: red;
-}
-
-/* Campos de texto mais longos */
+/* Campos: cada campo ocupa 100% da linha */
+input:not([type="radio"]),
+select,
 textarea {
-    grid-column: 1 / -1;
+    display: block;
+    width: 100% !important;      /* FORÇA 100% */
+    max-width: 100% !important; 
+    min-width: 0 !important; 
+    padding: var(--space-2) var(--space-3);
+    border-radius: 8px;
+    border: 1px solid var(--cor-neutra-300, #e0e0e0);
+    font-size: var(--fs-md);
+    background-color: #fdfdfd;
+    transition: all 0.18s ease;
+    box-sizing: border-box;
+    margin: 0 0 var(--space-3) 0; /* separação vertical */
+}
+
+/* Garante que labels fiquem acima dos inputs */
+form label,
+.form-container label {
+    display: block;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+/* Textareas ocupam linha inteira */
+textarea {
     min-height: 120px;
     resize: vertical;
 }
 
-/* Botão */
-button {
-    grid-column: 1 / -1;
+/* Radio group - vertical */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: var(--space-3);
+}
+
+/* Botão ocupa linha inteira */
+form button,
+.form-container .button {
+    display: block;
+    width: 100% !important;
+    margin-top: 8px;
     padding: var(--space-3);
     border: none;
     border-radius: 8px;
@@ -302,12 +363,24 @@ button {
     font-size: var(--fs-md);
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: var(--cor-primaria-hover, #0056b3);
+/* Remove regras .form-grid que transformavam em grid em telas maiores */
+@media (min-width: 768px) {
+    .form-grid {
+        display: block;
+    }
 }
+
+[class*="col-"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 
 /* ===== ALERTAS ===== */
 .alert {
@@ -346,7 +419,7 @@ button:hover {
 
 
 /* =====================================================
-   FOOTER
+                         FOOTER
    ===================================================== */
 footer {
     background-color: var(--cor-neutra-900);
@@ -415,63 +488,80 @@ footer a:hover {
 
 
 /* =====================================================
-   RESPONSIVIDADE
+                    RESPONSIVIDADE
    ===================================================== */
 
-/* Desktop grande */
-@media (max-width: 1200px) {
-    main {
-        padding: 0 var(--space-2);
-    }
-}
+@media (min-width: 768px) {
 
-/* Laptop */
-@media (max-width: 992px) {
-    nav ul {
-        gap: var(--space-2);
-    }
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-    main {
-        grid-template-columns: repeat(6, 1fr);
-    }
-    main section {
-        grid-column: span 6;
-    }
-
+    /* Esconde o menu hambúrguer */
     .menu-toggle {
-        display: flex;
+        display: none;
+    }
+    
+    /* Mostra a navegação e a ajusta para o formato desktop */
+    nav {
+        display: block;
+        position: static;
+        width: auto;
+        background-color: transparent;
+        box-shadow: none;
     }
 
     nav ul {
+        flex-direction: row; /* Itens lado a lado */
+        gap: var(--space-3);
+        padding: 0;
+    }
+    
+    nav ul li {
+        padding: 0;
+    }
+    
+    /* Faz o submenu dropdown funcionar no desktop */
+    nav li {
+        position: relative;
+    }
+
+    nav li ul {
         display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--cor-neutra-100);
         position: absolute;
-        top: 70px;
-        right: 0;
-        padding: var(--space-3);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        top: 100%;
+        left: 0;
+        background-color: var(--color-neutral-100);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        padding: var(--space-2);
+        border-radius: 8px;
+        min-width: 180px;
     }
 
-    nav.active ul {
-        display: flex;
+    nav li:hover > ul {
+        display: block;
     }
 }
 
-/* Celulares */
-@media (max-width: 576px) {
-    h1 { font-size: var(--fs-lg); }
-    h2 { font-size: var(--fs-md); }
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
 }
 
-/* Pequenos dispositivos */
-@media (max-width: 400px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
+@media (min-width: 768px) {
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--space-3);
+    }
+}
+
+/* Ajustes no footer para telas pequenas */
+.footer-container {
+    flex-direction: column;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .footer-container {
+        flex-direction: row; 
+        text-align: left;
     }
 }
