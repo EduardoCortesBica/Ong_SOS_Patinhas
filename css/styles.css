@@ -477,7 +477,7 @@ footer a:hover {
 }
 
 /* ===== CENTRALIZAÇÃO DE IMAGENS e TEXTO ===== */
-.center-image {
+.center-image {  /*retirei essa função para melhor compatibilidade mobile, mas deixei salvo para referência futura*/
   margin-left: auto;
   margin-right: auto;
   width: 50%;
