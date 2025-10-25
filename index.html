@@ -33,7 +33,7 @@
     </nav>
 </header>
 
-    <main> 
+    <main id="main-content">
   <section class="hero-section">
         <h1>Amor que Transforma: Resgate, Cuidado e Adoção.</h1>
         <p>Junte-se a nós neste movimento que transforma dor em esperança, facilitando a adoção responsável e mudando futuros.</p>
@@ -47,9 +47,8 @@
             <img src="images/voluntarios.jpg" alt="Voluntários em ação" width="330" height="300">
         </section>
 
-        <section>
-            <h2>Amigos à Espera de um Lar</h2>
-
+        <section id="animais-para-adocao">
+        <h2>Nossos Animais Prontos para Adoção</h2>
             <section>
             <article>
                 <h3>Conheça o Pitoco!</h3>
@@ -72,12 +71,13 @@
             </article>
         </section>
 
-        <section>
+       <section class="center-text">
             <h2>Credibilidade e Impacto do Trabalho</h2>
-            <ul>
-                <li>+100 Resgates Realizados e castrações efetuadas</li>
-                <li>+90 Adoções Responsáveis Concluídas</li>
-            </ul>
+            <p>Nossos números de vidas impactadas. Passe o mouse sobre as barras para ver os totais.</p>
+
+            <div class="chart-container">
+                <canvas id="impactoChart"></canvas>
+            </div>
         </section>
 </main>
 
@@ -115,5 +115,7 @@ toggle.addEventListener('click', () => {
 });
 </script>
 <script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/charts.js"></script>
 </body>
 </html>
