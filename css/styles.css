@@ -380,12 +380,15 @@ textarea {
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease; /* A mágica da animação */
+    transition: transform 0.5s ease;
+    padding: 0; /* Garante que não haja preenchimento interno */
+    margin: 0;  /* Garante que não haja margem */
 }
 
 .carousel-item {
-    min-width: 100%;
+    width: 100%;
     flex-shrink: 0;
+    box-sizing: content-box;
 }
 
 .carousel-item img {
